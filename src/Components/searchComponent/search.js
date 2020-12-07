@@ -10,7 +10,6 @@ function Search() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  
 //fetch the search result and set the data in state
   const fetchData = useCallback(async () => {
     setLoading(true);

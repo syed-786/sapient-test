@@ -18,33 +18,74 @@ const launch_year_arr = [
   2018,
   2019,
   2020,
+  'Clear filter'
 ];
 
 function SideBar() {
-  const [launch_year, setLaunchYear] = useState();
-  const [launch_success, setLaunchsuccess] = useState();
-  const [land_success, setLandSuccess] = useState();
+  const [launch_year, setLaunchYear] = useState('');
+  const [launch_success, setLaunchSuccess] = useState('');
+  const [land_success, setLandSuccess] = useState('');
 
   let history = useHistory();
 
 
   //this function will accept the filer name and  value and set them in state 
   const onSearchSubmit = (state_val, state_name) => {
+    
     if (state_name === "launch_year") {
+      if(state_val == "Clear filter"){
+        setLaunchYear('');
+        setLaunchSuccess('');
+        setLandSuccess('');
+        history.replace({pathname : "/"}); 
+      }
+      else{
       setLaunchYear(state_val);
+      }
     }
     if (state_name === "launch_success") {
-      setLaunchsuccess(state_val);
+      if(launch_year === ''){
+        return;
+      }
+      if(state_val == "clear"){
+        setLaunchSuccess('');
+        history.replace({
+          pathname: "/search",
+          search: `${launch_year ? `&launch_year=${launch_year}` : ""}${
+            land_success ? `&land_success=${land_success}` : ""
+          }`,
+        }); 
+      }
+      else{
+      setLaunchSuccess(state_val);
+      }
     }
     if (state_name === "land_success") {
-      setLandSuccess(state_val);
+      if(launch_year === ''){
+        return;
+      }
+      if(state_val == "clear"){
+        setLandSuccess('');
+        history.replace({
+          pathname: "/search",
+          search: `${launch_year ? `&launch_year=${launch_year}` : ""}${
+            launch_success ? `&launch_success=${launch_success}`: ""
+          }`,
+        }); 
+      }
+      else{
+        setLandSuccess(state_val);
+      }
+      
     }
+
   };
 
 
   //useEffect will push the filer value and push them in history object  
   useEffect(() => {
     const { push } = history || {};
+    console.log("SideBar -> history", history)
     if (push && launch_year || launch_success || land_success)
       push({
         pathname: "/search",
@@ -57,7 +98,7 @@ function SideBar() {
   const renderYear = () => {
     return launch_year_arr.map((el) => (
       <li key={el}>
-        <button className='pill' key={el} onClick={() => onSearchSubmit(el, "launch_year")}>
+        <button style={{backgroundColor : el ==='Clear filter' ? 'tomato': null }} className='pill' key={el} onClick={() => onSearchSubmit(el, "launch_year")}>
           {el}
         </button>
       </li>
@@ -80,6 +121,9 @@ function SideBar() {
         <button className='pill' onClick={() => onSearchSubmit("false", "launch_success")}>
           False
         </button>
+        <button className='pill' onClick={() => onSearchSubmit("clear", "launch_success")}>
+          Clear filter
+        </button>
       </div>
       <h4>Successful Landing</h4>
       <div className='launch'>
@@ -88,6 +132,9 @@ function SideBar() {
         </button>
         <button className='pill' onClick={() => onSearchSubmit("false", "land_success")}>
           False
+        </button>
+        <button className='pill' onClick={() => onSearchSubmit("clear", "land_success")}>
+          Clear filter
         </button>
       </div>
     </div>
