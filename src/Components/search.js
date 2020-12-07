@@ -24,7 +24,7 @@ function Search() {
 
   const renderResult = () => {
     return (
-      loading ? <h2>Loading Data...</h2>
+      loading ? <img className='image-center' src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
       :
       (
       <div className='band'>
