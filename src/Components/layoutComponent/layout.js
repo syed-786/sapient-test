@@ -1,7 +1,6 @@
 import React from 'react';
-import SideBar from './sideBar';
-
-
+import SideBar from '../sideBarComponent/sideBar';
+import './layout.css'
 function Layout(props) {
   
     return (

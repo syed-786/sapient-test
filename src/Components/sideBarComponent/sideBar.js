@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
-
 import { useHistory } from "react-router-dom";
-
+import './sideBar.css'
 //array of filter buttons
 const launch_year_arr = [
   2006,

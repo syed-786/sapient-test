@@ -1,7 +1,7 @@
-import Main from './Components/main'
-import Search from './Components/search'
+import Main from './Components/mainComponent/main'
+import Search from './Components/searchComponent/search'
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import Layout from './Components/layout'
+import Layout from './Components/layoutComponent/layout'
 
 function App() {
   return (

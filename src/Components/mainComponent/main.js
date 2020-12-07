@@ -1,26 +1,27 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useCallback} from "react";
 import axios from "axios";
-import "../App.css";
+import "./main.css";
+import loader from "../../loader.gif";
 
 function Main() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(12);
-
-
-  //useEffect will run on initial render of component adn then rerun when their is a change in limit (when user clicks Load more button).
-  useEffect(() => {
-    fetchData();
-  }, [limit]);
+  const [limit, setLimit] = useState(8);
 
 
   //this method will hit api and render initial data on screeen.
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const res = await axios.get(`https://api.spaceXdata.com/v3/launches?limit=${limit}`);
     setLoading(false);
     setData(res.data);
-  };
+  },[limit])
+
+//useEffect will run on initial render of component adn then rerun when their is a change in limit (when user clicks Load more button).
+useEffect(() => {
+  fetchData();
+}, [limit, fetchData]);
+
 
   //method to set data limit
   const setLimitHandler = () => {
@@ -30,7 +31,7 @@ function Main() {
   //contain jsx and data to display on screen
   const renderResult = () => {
     return (
-      loading ? <img className='image-center' src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+      loading ? <img className='image-center' src={loader} alt='loader'/>
       :
       (
       <div className='band'>
@@ -69,8 +70,11 @@ function Main() {
       <div className='divR'>
         <div className='support-grid'></div>
         {renderResult()}
-        {data.length > 7 ? <span className='load-more-button' onClick={setLimitHandler}>Load More...</span> : null}
-      </div>
+        {/* Button to load more data from api */}
+       { loading ? null :
+        data.length > 7 ? <span className='load-more-button' onClick={setLimitHandler}>Load More...</span> : null
+       }
+        </div>
     </>
   );
 }
