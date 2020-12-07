@@ -11,7 +11,7 @@ function Layout(props) {
             <SideBar/>
             {props.children}
             </div>
-            <div className="text-center"><strong>Developed By :</strong> Syed Adeeb Ahmed
+            <div className="text-center"><strong>Developed By :</strong> Syed Adeeb Ahmad
             </div>
         </>
     )

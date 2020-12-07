@@ -38,6 +38,16 @@ body {
   margin-left: 200px;
 }
 
+.load-more-button {
+  margin-left:380px;
+  color:green;
+}
+
+.load-more-button:hover{
+  cursor:pointer;
+  color:blue;
+}
+
 .pills__container ul li {
   list-style: none;
   flex: 0 0 50%;

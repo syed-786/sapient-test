@@ -1,21 +1,26 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import axios from "axios";
 import "../App.css";
 
 function Main() {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(12);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [limit]);
 
   const fetchData = async () => {
     setLoading(true);
-    const res = await axios.get("https://api.spaceXdata.com/v3/launches?limit=100");
+    const res = await axios.get(`https://api.spaceXdata.com/v3/launches?limit=${limit}`);
     setLoading(false);
     setData(res.data);
   };
+
+  const setLimitHandler = () => {
+    setLimit(prevLimit => prevLimit + 8);
+  }
 
   const renderResult = () => {
     return (
@@ -58,6 +63,7 @@ function Main() {
       <div className='divR'>
         <div className='support-grid'></div>
         {renderResult()}
+        {data.length > 7 ? <span className='load-more-button' onClick={setLimitHandler}>Load More...</span> : null}
       </div>
     </>
   );
