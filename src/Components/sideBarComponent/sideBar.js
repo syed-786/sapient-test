@@ -121,7 +121,7 @@ function SideBar() {
         <button className='pill' onClick={() => onSearchSubmit("false", "launch_success")}>
           False
         </button>
-        <button className='pill' onClick={() => onSearchSubmit("clear", "launch_success")}>
+        <button style={{backgroundColor : 'tomato'}} className='pill' onClick={() => onSearchSubmit("clear", "launch_success")}>
           Clear filter
         </button>
       </div>
@@ -133,7 +133,7 @@ function SideBar() {
         <button className='pill' onClick={() => onSearchSubmit("false", "land_success")}>
           False
         </button>
-        <button className='pill' onClick={() => onSearchSubmit("clear", "land_success")}>
+        <button style={{backgroundColor : 'tomato'}} className='pill' onClick={() => onSearchSubmit("clear", "land_success")}>
           Clear filter
         </button>
       </div>
