@@ -6,7 +6,7 @@ import Layout from './Components/layout'
 function App() {
   return (
     <BrowserRouter>
-
+{/* Main layout component */}
     <Layout>
       <Switch>
         <Route exact path="/" component={Main} />

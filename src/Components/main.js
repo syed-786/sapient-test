@@ -7,10 +7,14 @@ function Main() {
   const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(12);
 
+
+  //useEffect will run on initial render of component adn then rerun when their is a change in limit (when user clicks Load more button).
   useEffect(() => {
     fetchData();
   }, [limit]);
 
+
+  //this method will hit api and render initial data on screeen.
   const fetchData = async () => {
     setLoading(true);
     const res = await axios.get(`https://api.spaceXdata.com/v3/launches?limit=${limit}`);
@@ -18,10 +22,12 @@ function Main() {
     setData(res.data);
   };
 
+  //method to set data limit
   const setLimitHandler = () => {
     setLimit(prevLimit => prevLimit + 8);
   }
 
+  //contain jsx and data to display on screen
   const renderResult = () => {
     return (
       loading ? <img className='image-center' src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
@@ -69,4 +75,4 @@ function Main() {
   );
 }
 
-export default React.memo(Main);
+export default React.memo(Main);   // React.memo() from component optimization. It will prevent unnecessory rerendring of Component. 

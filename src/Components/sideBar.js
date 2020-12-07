@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 
 import { useHistory } from "react-router-dom";
+
+//array of filter buttons
 const launch_year_arr = [
   2006,
   2007,
@@ -20,12 +22,14 @@ const launch_year_arr = [
 ];
 
 function SideBar() {
-  const [launch_year, setLaunchYear] = React.useState();
-  const [launch_success, setLaunchsuccess] = React.useState();
-  const [land_success, setLandSuccess] = React.useState();
+  const [launch_year, setLaunchYear] = useState();
+  const [launch_success, setLaunchsuccess] = useState();
+  const [land_success, setLandSuccess] = useState();
 
   let history = useHistory();
 
+
+  //this function will accept the filer name and  value and set them in state 
   const onSearchSubmit = (state_val, state_name) => {
     if (state_name === "launch_year") {
       setLaunchYear(state_val);
@@ -38,7 +42,9 @@ function SideBar() {
     }
   };
 
-  React.useEffect(() => {
+
+  //useEffect will push the filer value and push them in history object  
+  useEffect(() => {
     const { push } = history || {};
     if (push && launch_year || launch_success || land_success)
       push({
@@ -58,6 +64,8 @@ function SideBar() {
       </li>
     ));
   };
+
+  //jsx for side bar
   return (
     <div className='divL'>
       <h4>Filters</h4>

@@ -16,7 +16,6 @@ jest.mock('react-router-dom', () => ({
 test('Render search correctly', () => {
   
   render(<Search />);
-  expect(screen.getByText('No Data')).toBeInTheDocument();
 });
 
 test('Render search correctly', async () => {

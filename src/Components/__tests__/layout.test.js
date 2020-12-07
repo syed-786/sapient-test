@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Layout from '../Layout';
+import Layout from '../layout';
 
 test('Render sidebar correctaly', () => {
   render(<Layout />);
@@ -7,5 +7,5 @@ test('Render sidebar correctaly', () => {
 
 test('Render "Space Launch Program" text correctaly', () => {
   render(<Layout />);
-  expect(screen.getByText('Space Launch Program')).toBeInTheDocument();
+  expect(screen.getByText('SpaceX Launch Program')).toBeInTheDocument();
 });

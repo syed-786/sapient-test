@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import "../App.css";
@@ -6,13 +6,15 @@ import "../App.css";
 function Search() {
   let location = useLocation();
 
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, [location && location.search]);
 
+  
+//fetch the search result and set the data in state
   const fetchData = async () => {
     setLoading(true);
     const search_params = location && location.search.replace("?", "");
@@ -87,4 +89,4 @@ function Search() {
   );
 }
 
-export default React.memo(Search);
+export default React.memo(Search);     // React.memo() from component optimization. It will prevent unnecessory rerendring of Component. 
