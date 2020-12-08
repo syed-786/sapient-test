@@ -5,6 +5,12 @@ body {
     display: flex;
     flex-direction: row;
   }
+
+
+ .clear-filter {
+   background-color: tomato;
+ }
+
   .divL,
   .divR {
     box-sizing: border-box;
